@@ -29,3 +29,11 @@ Route::group(['namespace' => 'Subscriptions'], function() {
     Route::post('/subscriptions', 'SubscriptionController@store')->name('subscriptions.store');
 
 });
+
+Route::group(['namespace' => 'Account', 'prefix' => 'account'], function() {
+    Route::get('/', 'AccountController@index')->name('account');
+    Route::group(['namespace' => 'Subscriptions', 'prefix' => 'subscriptions'], function() {
+        Route::get('/', 'SubscriptionController@index')->name('account.subscriptions');
+
+    });
+});
