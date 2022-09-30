@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class SubscriptionResumeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'subscribed']);
+    }
 
     public function index()
     {
