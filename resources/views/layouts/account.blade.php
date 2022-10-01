@@ -24,7 +24,15 @@
                     </li>
                   @endcan
 
+                  <li class="nav-item">
+                    <a href="{{ route('account.subscriptions.swap') }}" class="nav-link">
+                        Swap plan
+                    </a>
+                </li>
+
                 @endif
+
+
 
                 <li class="nav-item">
                     <a href="{{ route('account.subscriptions.invoices') }}" class="nav-link">

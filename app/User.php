@@ -2,7 +2,9 @@
 
 namespace App;
 
+use App\Plan;
 use Laravel\Cashier\Billable;
+use Laravel\Cashier\Subscription;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,4 +39,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function plan()
+    {
+        return $this->hasOneThrough(
+            Plan::class, Subscription::class,
+            'user_id', 'stripe_id', 'id', 'stripe_plan'
+        );
+    }
 }
