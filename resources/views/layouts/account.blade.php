@@ -30,6 +30,13 @@
                     </a>
                 </li>
 
+
+                <li class="nav-item">
+                    <a href="{{ route('account.subscriptions.card') }}" class="nav-link">
+                        Update card
+                    </a>
+                </li>
+
                 @endif
 
 
