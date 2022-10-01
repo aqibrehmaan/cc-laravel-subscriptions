@@ -37,9 +37,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('account.subscriptions.coupon') }}" class="nav-link">
+                        Apply coupon
+                    </a>
+                </li>
+
                 @endif
-
-
 
                 <li class="nav-item">
                     <a href="{{ route('account.subscriptions.invoices') }}" class="nav-link">
