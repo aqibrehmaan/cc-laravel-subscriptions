@@ -22,9 +22,14 @@ class SubscriptionInvoiceController extends Controller
 
     public function show(Request $request, $id)
     {
-        return $request->user()->downloadInvoice($id, [
-            'vendor' => config('app.name'),
-            'product' => 'Membership'
-        ]);
+
+        // return $request->user()->downloadInvoice($id, [
+        //     'vendor' => config('app.name'),
+        //     'product' => 'Membership'
+        // ]);
+
+        // Stripe invoice download
+
+        return redirect($request->user()->findInvoice($id)->asStripeInvoice()->invoice_pdf);
     }
 }
