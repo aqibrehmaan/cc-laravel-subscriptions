@@ -17,7 +17,7 @@
                     <a href="{{ route('account.subscriptions.cancel') }}" class="nav-link">Cancel Subscription</a>
                    </li>
                   @endcan
-                  
+
                   @can('resume', auth()->user()->subscription('default'))
                     <li class="nav-item">
                         <a href="{{ route('account.subscriptions.resume') }}" class="nav-link">Resume Subscription</a>
@@ -25,6 +25,12 @@
                   @endcan
 
                 @endif
+
+                <li class="nav-item">
+                    <a href="{{ route('account.subscriptions.invoices') }}" class="nav-link">
+                        Invoices
+                    </a>
+                </li>
 
             </ul>
         </div>
