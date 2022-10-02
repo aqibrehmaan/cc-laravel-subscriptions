@@ -9,7 +9,7 @@ use NumberFormatter;
 use Money\Currencies\ISOCurrencies;
 use Money\Formatter\IntlMoneyFormatter;
 
-class CustomerPresenter
+class CouponPresenter
 {
     protected $model;
 
@@ -18,7 +18,18 @@ class CustomerPresenter
         $this->model = $model;
     }
 
-    public function balance()
+    public function name()
+    {
+        return $this->model->name;
+    }
+
+    public function percent() {
+
+        return $this->model->percent_off . '%';
+
+    }
+
+    public function amount()
     {
         $formatter = new IntlMoneyFormatter(
             new NumberFormatter(config('cashier.currency_locale'), NumberFormatter::CURRENCY),
@@ -26,10 +37,18 @@ class CustomerPresenter
         );
 
         $money = new Money(
-            $this->model->balance,
+            $this->model->amount_off,
             new Currency(strtoupper(config('cashier.currency')))
         );
 
         return $formatter->format($money);
     }
+
+    public function value()
+    {
+
+        return $this->model->amount_off ? $this->amount() : $this->percent();
+
+    }
+
 }

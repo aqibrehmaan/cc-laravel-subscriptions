@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Plan;
+use App\Presenters\CustomerPresenter;
 use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use App\Presenters\InvoicePresenter;
@@ -68,5 +69,16 @@ class User extends Authenticatable
 
         return new InvoicePresenter($invoice->asStripeInvoice());
     }
+
+    public function presentCustomer()
+    {
+        if(!$this->hasStripeId())
+        {
+            return null;
+        }
+
+        return new CustomerPresenter($this->asStripeCustomer());
+    }
+
 }
 

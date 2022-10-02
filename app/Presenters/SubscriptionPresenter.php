@@ -6,6 +6,7 @@ use Money\Money;
 use Money\Currency;
 use NumberFormatter;
 use Illuminate\Support\Carbon;
+use App\Presenters\CouponPresenter;
 use Money\Currencies\ISOCurrencies;
 use Money\Formatter\IntlMoneyFormatter;
 
@@ -40,5 +41,15 @@ class SubscriptionPresenter {
     public function interval()
     {
         return $this->model->plan->interval;
+    }
+
+    public function coupon()
+    {
+        if(!$discount = $this->model->discount)
+        {
+            return null;
+        }
+
+        return new CouponPresenter($discount->coupon);
     }
 }
