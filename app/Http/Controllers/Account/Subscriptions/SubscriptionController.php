@@ -12,8 +12,10 @@ class SubscriptionController extends Controller
         $this->middleware(['auth']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('account.subscriptions.index');
+        return view('account.subscriptions.index', [
+            'subscription' => $request->user()->presentSubscription()
+        ]);
     }
 }

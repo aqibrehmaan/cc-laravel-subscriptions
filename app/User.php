@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Plan;
+use App\Presenters\SubscriptionPresenter;
 use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
 use Illuminate\Notifications\Notifiable;
@@ -47,4 +48,14 @@ class User extends Authenticatable
             'user_id', 'stripe_id', 'id', 'stripe_plan'
         );
     }
+
+    public function presentSubscription() {
+        if(!$subscription = $this->subscription('default'))
+        {
+            return null;
+        }
+
+        return new SubscriptionPresenter($subscription->asStripeSubscription());
+    }
 }
+
