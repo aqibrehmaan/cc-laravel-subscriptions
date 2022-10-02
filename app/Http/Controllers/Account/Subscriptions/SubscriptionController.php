@@ -15,7 +15,8 @@ class SubscriptionController extends Controller
     public function index(Request $request)
     {
         return view('account.subscriptions.index', [
-            'subscription' => $request->user()->presentSubscription()
+            'subscription' => $request->user()->presentSubscription(),
+            'invoice' => $request->user()->presentUpcomingInvoice()
         ]);
     }
 }

@@ -6,17 +6,23 @@
 
     <div class="card-body">
        @if (auth()->user()->subscribed())
+       <ul>
            @if ($subscription)
-               <ul>
                     <li>
                         Plan: {{ auth()->user()->plan->title }} ({{ $subscription->amount() }}/{{ $subscription->interval() }})
                         @if (auth()->user()->subscription('default')->cancelled())
                             Ends {{ $subscription->cancelAt() }}. <a href="{{ route('account.subscriptions.resume') }}">Resume</a>
                         @endif
                     </li>
-               </ul>
                @endif
-            @else
+
+            @if($invoice)
+            <li>
+                Next payment: {{ $invoice->amount() }} on {{ $invoice->nextPaymentAttempt() }}
+            </li>
+            @endif
+        </ul>
+       @else
            <p>You don't have a subscription</p>
        @endif
 

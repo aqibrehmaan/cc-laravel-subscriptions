@@ -3,10 +3,11 @@
 namespace App;
 
 use App\Plan;
-use App\Presenters\SubscriptionPresenter;
 use Laravel\Cashier\Billable;
 use Laravel\Cashier\Subscription;
+use App\Presenters\InvoicePresenter;
 use Illuminate\Notifications\Notifiable;
+use App\Presenters\SubscriptionPresenter;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -56,6 +57,16 @@ class User extends Authenticatable
         }
 
         return new SubscriptionPresenter($subscription->asStripeSubscription());
+    }
+
+    public function presentUpcomingInvoice()
+    {
+        if(!$invoice = $this->upcomingInvoice())
+        {
+            return null;
+        }
+
+        return new InvoicePresenter($invoice->asStripeInvoice());
     }
 }
 
