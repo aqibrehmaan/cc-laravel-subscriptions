@@ -56,3 +56,4 @@ Route::group(['namespace' => 'Account', 'prefix' => 'account'], function() {
 
     });
 });
+
